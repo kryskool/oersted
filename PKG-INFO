@@ -1,10 +1,45 @@
 Metadata-Version: 1.0
 Name: oersted
-Version: 1.0
-Summary: UNKNOWN
+Version: 1.0.1
+Summary: ======
+Œrsted
+======
+
+Œrsted is a library to access OpenERP objects pythonicaly. It allows you to do
+stuff like ::
+
+    >>> from oersted import OEClient
+    >>> oeclient = OEClient('localhost')
+    >>> oeclient.login('database', 'admin', 'password')
+    >>> Product = oeclient.create_browse('database', 'product.product')
+    >>> product = Product(1)  # Fetch product with id == 1
+    >>> product.name
+    u'Flan au Chocolat'
+    >>> product.categ_id
+    <oersted.browse.product.category object at 0xb74abf6c>
+    >>> print product.categ_id
+    <product.category 4@database>
+    >>> product.categ_id.name
+    u'Gourmandises'
+    >>> for seller_info in product.seller_ids:
+    ...     print seller_info, seller_info.name.name
+    ...
+    <product.supplierinfo 3@database> Chocolate Ltd
+    >>>
+
+
 Home-page: http://www.pcsol.be
 Author: PCSol
 Author-email: info@pcsol.be
-License: LICENSE.txt
+License: GPL-3
 Description: UNKNOWN
 Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Plugins
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Office/Business
