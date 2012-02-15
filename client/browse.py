@@ -95,8 +95,10 @@ class O2MDescriptor(DefaultDescriptor):
 class DTDescriptor(DefaultDescriptor):
 
     def attrgetter(self, instance, owner):
-        return datetime.datetime.strptime(instance._oe_values[self.attrname],
-                                          '%Y-%m-%d %H:%M:%S')
+        value = instance._oe_values[self.attrname]
+        if not value:
+            return None
+        return datetime.datetime.strptime(value, '%Y-%m-%d %H:%M:%S')
 
     def __set__(self, instance, value):
         if isinstance(value, basestring):
@@ -109,7 +111,10 @@ class DTDescriptor(DefaultDescriptor):
 class DDescriptor(DTDescriptor):
 
     def attrgetter(self, instance, owner):
-        return super(DDescriptor, self).attrgetter(instance, owner).date()
+        value = instance._oe_values[self.attrname]
+        if not value:
+            return None
+        return datetime.datetime.strptime(value, '%Y-%m-%d')
 
     def __set__(self, instance, value):
         if isinstance(value, basestring):
