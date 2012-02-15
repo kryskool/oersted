@@ -24,3 +24,12 @@ stuff like ::
     <product.supplierinfo 3@database> Chocolate Ltd
     >>>
 
+Œrsted also provide a way to use defaults/onchange's and view specific stuffs:
+
+    >>> View = oeclient.create_view('database', 'sale.view_order_form')
+    >>> n_view = View()
+    >>> n_view.partner_id = Partner(4)
+    >>> n_view.pricelist_id
+    <oersted.browse.product.pricelist object at 0xb56ghc3>
+
+That some might find usefull

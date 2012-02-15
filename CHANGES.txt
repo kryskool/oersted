@@ -1,3 +1,9 @@
+v1.2.0, 2010-11-29 -- Added lazy load in Browse objects
+                      Added operation 1 to oe_repr
+                      Views can get Browse attributes
+                      Returns default value instead of AttributeError if there
+                      is no value
+                      Fix DB creation where running more than once
 v1.1.4, 2010-11-10 -- Bugfix use of long to represent browse'id in Browse's m2o
 v1.1.3, 2010-11-09 -- Made Browse object more useable
 v1.1.2, 2010-08-24 -- Added name_search specific API call

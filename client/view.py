@@ -41,8 +41,9 @@ class OnchangeDescriptor(ViewDescriptor):
         ids = [] if instance._browse.id is None else [instance._browse.id]
         args = self.eval_args(self.args_name, instance)
         onchange_data = getattr(proxy, self.func_name)(ids, *args)
-        for field_name, value in onchange_data['value'].items():
-            setattr(instance, field_name, value)
+        if 'value' in onchange_data:
+            for field_name, value in onchange_data['value'].items():
+                setattr(instance._browse, field_name, value)
 
     def eval_args(self, args_name, view):
         "Builds the local context and evaluate argument list"
@@ -73,6 +74,9 @@ class View(object):
             self._browse = self.Browse(**default_val)
         else:
             self._browse = self.Browse(id)
+
+    def __getattr__(self, attrname):
+        return getattr(self._browse, attrname)
 
 
 class MetaView(type):

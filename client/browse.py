@@ -16,12 +16,13 @@ class DefaultDescriptor(object):
         self.attrname = attrname
 
     def __get__(self, instance, owner):
+        instance._read()
         if self.attrname not in instance._browse_values:
             try:
                 instance._browse_values[self.attrname] = \
                         self.attrgetter(instance, owner)
             except KeyError:
-                raise AttributeError(self.attrname)
+                return False
         return instance._browse_values[self.attrname]
 
     def attrgetter(self, instance, owner):
@@ -88,6 +89,13 @@ class O2MDescriptor(DefaultDescriptor):
                           instance, self.attrname)
 
     def __set__(self, instance, value):
+        if value and isinstance(value[0], (int, long)):
+            browse_klass = BrowseFactory.get(instance._proxy.database,
+                                             self.relation)
+            browse_list = BrowseList([], instance, self.attrname)
+            for oid in value:
+                browse_list.append(browse_klass(oid))
+            value = browse_list
         super(O2MDescriptor, self).__set__(instance, value)
 
 
@@ -164,13 +172,21 @@ class Browse(object):
         self._parent = None # store the parent record
         self._parent_field_name = None # store the field name in parent record
         self._browse_values = {}
-        if id is not None:
-            self._oe_values = self._proxy.read(id)
-            if not self._oe_values:
-                raise BrowseNotFoundError(id)
-        else:
+        if id is None:
             for name, value in kwargs.items():
                 setattr(self, name, value)
+
+    def _read(self):
+        if self._oe_values:
+            return
+        if not self.id:
+            return
+        self._oe_values = self._proxy.read(self.id)
+        # XXX fix for bug #366089
+        if isinstance(self._oe_values, list):
+            self._oe_values, = self._oe_values
+        if not self._oe_values:
+            raise BrowseNotFoundError(id)
 
     @classmethod
     def search(cls, condition=None, offset=0, limit=None, order_by=None):
@@ -210,7 +226,10 @@ class Browse(object):
             if not self._changed:
                 return
             self._proxy.write([self.id], self.oe_repr)
-        self.reload()
+        # clean cache
+        self._oe_values = {}
+        self._changed = set()
+        self._browse_values = {}
 
     def reload(self):
         for attrname in self._changed:
@@ -255,6 +274,8 @@ class BrowseList(list):
         for item in self.item_added:
             if item.id is None:
                 value.append((0, 0, item.oe_repr))
+            elif item._changed:
+                value.append((1, item.id, item.oe_repr))
             else:
                 value.append((4, item.id))
         for item in self.item_removed:
