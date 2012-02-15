@@ -48,6 +48,11 @@ class ProxyObj(object):
         self.cnx.send(message)
         return self.cnx.receive()
 
+    def search(self, condition=None, offset=0, limit=None, order_by=None):
+        if condition is None:
+            condition = []
+        return self.__getattr__('search')(condition, offset, limit, order_by)
+
     def __getattr__(self, name):
         def proxy(*attrs):
             assert self.uid and self.password
