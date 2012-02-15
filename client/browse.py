@@ -65,7 +65,7 @@ class M2ODescriptor(DefaultDescriptor):
         if not value:
             return
         instance._changed.add(self.attrname)
-        if isinstance(value, int):
+        if isinstance(value, (int, long)):
             instance._oe_values[self.attrname] = (value, '')
             if self.attrname in instance._browse_values:
                 del instance._browse_values[self.attrname]
