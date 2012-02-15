@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: oersted
-Version: 1.1.4
+Version: 1.2.0
 Summary: Module to access OpenERP objects pythonically
 Home-page: http://www.pcsol.be
 Author: PCSol
@@ -32,6 +32,15 @@ Description: ======
             <product.supplierinfo 3@database> Chocolate Ltd
             >>>
         
+        Œrsted also provide a way to use defaults/onchange's and view specific stuffs:
+        
+            >>> View = oeclient.create_view('database', 'sale.view_order_form')
+            >>> n_view = View()
+            >>> n_view.partner_id = Partner(4)
+            >>> n_view.pricelist_id
+            <oersted.browse.product.pricelist object at 0xb56ghc3>
+        
+        That some might find usefull
         
 Platform: UNKNOWN
 Classifier: Development Status :: 5 - Production/Stable

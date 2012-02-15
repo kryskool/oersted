@@ -173,11 +173,11 @@ class OEClient(object):
             if not overwrite:
                 raise DBExistError
             self.execute(('db', 'drop', dbpass, dbname))
-        self.execute(('db', 'create', dbpass, dbname, demo, lang, adminpass))
+        db_id = self.execute(('db', 'create', dbpass, dbname, demo, lang, adminpass))
         db_created = False
         while not db_created:
             db_created, user = self.execute(('db', 'get_progress', adminpass,
-                                             1))
+                                             db_id))
             time.sleep(0.5)
 
         self.login(dbname, 'admin', adminpass)
