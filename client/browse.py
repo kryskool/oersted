@@ -181,6 +181,12 @@ class Browse(object):
         ids = cls._proxy.search(condition, offset, limit, order_by)
         return [cls(id) for id in ids]
 
+    @classmethod
+    def name_search(cls, name='', args=None, operator='ilike', limit=80):
+        'Return Browse instances'
+        return [cls(id) for id, name in cls._proxy.name_search(name, args,
+                                                               operator, limit)]
+
     @property
     def oe_repr(self):
         value = {}
