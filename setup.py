@@ -1,11 +1,25 @@
 from distutils.core import setup
 
 setup(name='oersted',
-      version='1.0',
+      version='1.0.1',
       author='PCSol',
       author_email='info@pcsol.be',
       url='http://www.pcsol.be',
-      license='LICENSE.txt',
+      license='GPL-3',
       package_dir={'oersted': 'client'},
-      packages=['oersted'],)
+      description=open('README.txt').read(),
+      classifiers=[
+         'Development Status :: 5 - Production/Stable',
+         'Environment :: Plugins',
+         'Intended Audience :: Developers',
+         'Intended Audience :: Financial and Insurance Industry',
+         'Intended Audience :: Information Technology',
+         'License :: OSI Approved :: GNU General Public License (GPL)',
+         'Operating System :: OS Independent',
+         'Programming Language :: Python',
+         'Topic :: Office/Business',
+      ],
+      packages=['oersted'],
+      install_requires=['lxml'],
+     )
 
