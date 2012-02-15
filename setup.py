@@ -1,13 +1,14 @@
 from distutils.core import setup
 
 setup(name='oersted',
-      version='1.0.1',
+      version='1.1.0',
       author='PCSol',
       author_email='info@pcsol.be',
       url='http://www.pcsol.be',
       license='GPL-3',
       package_dir={'oersted': 'client'},
-      description=open('README.txt').read(),
+      description='Module to access OpenERP objects pythonically',
+      long_description=open('README.txt').read(),
       classifiers=[
          'Development Status :: 5 - Production/Stable',
          'Environment :: Plugins',

@@ -20,7 +20,7 @@ class ERPError(Exception):
         if self.type == 'error':
             return self.traceback
         else:
-            return self.exception
+            return unicode(self.exception).encode('utf-8')
 
 
 class OEConnection(socket.socket):

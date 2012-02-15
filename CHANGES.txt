@@ -1,1 +1,4 @@
-v0.1, 2010-08-12 -- Initial release
+v1.1.0, 2010-08-20 -- Fix search for proxy objects, use O2M descriptor for m2m
+v1.0.1, 2010-08-16 -- Added __version__ variable to __init__.py, some packaging
+                      changes
+v1.0.0, 2010-08-12 -- Initial release

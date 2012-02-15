@@ -81,7 +81,8 @@ class O2MDescriptor(DefaultDescriptor):
         self.relation = field_def['relation']
 
     def attrgetter(self, instance, owner):
-        browse_klass = BrowseFactory.get(instance._proxy.database, self.relation)
+        browse_klass = BrowseFactory.get(instance._proxy.database,
+                                         self.relation)
         return BrowseList([browse_klass(oid)
                            for oid in instance._oe_values[self.attrname]],
                           instance, self.attrname)
@@ -123,6 +124,7 @@ class MetaBrowser(type):
     descriptors = {'float': FloatDescriptor,
                    'many2one': M2ODescriptor,
                    'one2many': O2MDescriptor,
+                   'many2many': O2MDescriptor,
                    'datetime': DTDescriptor,
                    'date': DDescriptor}
 
