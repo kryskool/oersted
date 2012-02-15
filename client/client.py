@@ -38,6 +38,13 @@ class ProxyObj(object):
                        self.password, self.model, transition, obj_id))
         return self.cnx.receive()
 
+    def name_search(self, name='', args=None, operator='ilike', limit=80):
+        message = (('object', 'execute', self.database, self.uid,
+                    self.password, self.model, 'name_search', name, args,
+                    operator, self.context.as_dict(), limit))
+        self.cnx.send(message)
+        return self.cnx.receive()
+
     def read(self, ids, fields=[]):
         return self.__getattr__('read')(ids, fields)
 
