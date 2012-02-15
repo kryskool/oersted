@@ -21,7 +21,8 @@ class ViewDescriptor(object):
         return setattr(instance._browse, self.attrname, value)
 
 
-# We will try to mimic OpenERP's client. Bugs and wrong design decisions included
+# We will try to mimic OpenERP's client. Bugs and wrong design decisions
+# included
 class OnchangeDescriptor(ViewDescriptor):
 
     FUNC_RE = re.compile('^(.*?)\((.*)\)$')
@@ -62,6 +63,7 @@ class OnchangeDescriptor(ViewDescriptor):
     def eval_arg(self, arg, context):
         "This function tries to evaluate safely expressions"
         return eval(arg, {'__builtins__': []}, context)
+
 
 class View(object):
 

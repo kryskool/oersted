@@ -88,7 +88,6 @@ class O2MDescriptor(DefaultDescriptor):
                           instance, self.attrname)
 
     def __set__(self, instance, value):
-        current_value = instance._browse_values[self.attrname]
         super(O2MDescriptor, self).__set__(instance, value)
 
 

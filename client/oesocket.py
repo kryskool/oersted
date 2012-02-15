@@ -29,10 +29,11 @@ class OEConnection(socket.socket):
         self.host = host
         self.port = port
         self.socket = None
+        self.timeout = 5
 
     def send(self, message, exception=False, traceback=None):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.settimeout(0.5)
+        self.socket.settimeout(self.timeout)
         self.socket.connect((self.host, self.port))
         self.socket.settimeout(None)
         picked = cPickle.dumps([message, traceback])
