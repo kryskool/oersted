@@ -209,13 +209,12 @@ class OEClient(object):
             raise TypeError
         module, view_name = view_id.split('.')
         data_obj = self.create_proxy(db, 'ir.model.data')
-        data_id = data_obj._get_id(module, view_name)
-        data = data_obj.read(data_id)
-        assert data['model'] == 'ir.ui.view'
+        (model, data_id) = data_obj.get_object_reference(module, view_name)
+        assert model == 'ir.ui.view'
 
         view_proxy = self.create_proxy(db, 'ir.ui.view')
-        view_info = view_proxy.read(data['res_id'])[0]
-        return ViewFactory.get(self, db, view_info['model'], data['res_id'])
+        view_info = view_proxy.read(data_id)
+        return ViewFactory.get(self, db, view_info['model'], data_id)
 
     def login(self, db, user, password):
         self.credentials[db]['login'] = user
