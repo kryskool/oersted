@@ -8,7 +8,7 @@ setup(name='oersted',
       license='GPL-3',
       package_dir={'oersted': 'client'},
       description='Module to access OpenERP objects pythonically',
-      long_description=open('README.txt').read(),
+      long_description=open('README.rst').read(),
       classifiers=[
          'Development Status :: 5 - Production/Stable',
          'Environment :: Plugins',
