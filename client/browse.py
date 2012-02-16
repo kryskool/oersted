@@ -245,8 +245,11 @@ class Browse(object):
                    (other._proxy.database, other._proxy.model, other.id))
 
     def __str__(self):
-        return '<%s %s@%s>' % (self._proxy.model, self.id,
+        return '<%s(%s)@%s>' % (self._proxy.model, self.id,
                                self._proxy.database)
+
+    def __repr__(self):
+        return self.__str__()
 
     def __getattr__(self, attrname):
         return getattr(self._proxy, attrname)
