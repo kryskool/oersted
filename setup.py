@@ -1,10 +1,15 @@
+import sys
+sys.path.append('.')
+
+import client
+
 from distribute_setup import use_setuptools
 use_setuptools()
 
 from setuptools import setup
 
 setup(name='oersted',
-      version='1.2.0',
+      version=client.__version__,
       author='PCSol',
       author_email='info@pcsol.be',
       url='http://www.pcsol.be',
