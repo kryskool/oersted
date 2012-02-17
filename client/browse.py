@@ -1,4 +1,4 @@
-# encoding: utf8
+# -*- coding: utf-8 -*-
 
 # Some part of the code is taken from proteus a python library to access tryton
 # Copyright (C) 2010 Cédric Krier and B2CK SPRL
