@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import time
+import os
 
 from view import ViewFactory
 from browse import BrowseFactory
@@ -216,11 +217,26 @@ class OEClient(object):
         view_info = view_proxy.read(data_id)
         return ViewFactory.get(self, db, view_info['model'], data_id)
 
-    def login(self, db, user, password):
+    def login(self, db=None, user=None, password=None):
+        """
+        Login phase, if no db, user, password, use environnement variable
+
+        :param db: name of the database
+        :param user: name of the user to identify
+        :param password: user's password
+        :return: user ID
+        """
+        if db is None:
+            db = os.environ.get('OERP_DATABASE', 'demo')
+
+        user = user or os.environ.get('OERP_USERNAME', 'admin')
+        password = password or os.environ.get('OERP_PASSWORD', 'admin')
+
         self.credentials[db]['login'] = user
         self.credentials[db]['password'] = password
         if 'uid' in self.credentials[db]:
             del self.credentials[db]['uid']
+
         uid = self.execute(('common', 'login', db, user, password))
         if uid:
             self.credentials[db]['uid'] = uid
