@@ -170,6 +170,17 @@ class OEClient(object):
         self.oe_conn.send(command)
         return self.oe_conn.receive()
 
+    def get_object_reference(self, database, module, name):
+        server_version = self.oe_conn.server_version()
+        data_obj = self.create_proxy(database, 'ir.model.data', context=False)
+
+        if server_version[0] == '5':
+            model_id = data_obj._get_id(module, name)
+            data = data_obj.read(model_id, ['model', 'res_id'])
+            return data['model'], int(data['res_id'])
+        else:
+            return data_obj.get_object_reference(module, name)
+
     def create_db(self, dbname, dbpass, adminpass, demo=False, lang='fr_FR',
                   overwrite=False):
         dbs = self.execute(('db', 'list'))
