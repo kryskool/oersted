@@ -64,9 +64,12 @@ class ProxyObj(object):
     def __getattr__(self, name):
         def proxy(*attrs):
             assert self.uid and self.password
+            context = ()
+            if self.context is not None:
+                context = (self.context.as_dict(),)
             message = (('object', 'execute', self.database, self.uid,
                         self.password, self.model, name)
-                       + attrs + (self.context.as_dict(),))
+                       + attrs + context)
             self.cnx.send(message)
             return self.cnx.receive()
         return proxy
