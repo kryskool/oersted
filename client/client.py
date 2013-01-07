@@ -193,8 +193,9 @@ class OEClient(object):
         wiz_name = actwiz_obj.read(wiz_id)['wiz_name']
         return self.create_wizard(dbname, wiz_name)
 
-    def create_proxy(self, db, object):
-        return ProxyObj(object, db, self.credentials[db], self.context,
+    def create_proxy(self, db, object, context=True):
+        context = context and self.context or None
+        return ProxyObj(object, db, self.credentials[db], context,
                         self.oe_conn)
 
     def create_browse(self, db, object):
