@@ -61,3 +61,7 @@ class OEConnection(socket.socket):
 
         self.socket.close()
         self.socket = None
+
+    def server_version(self):
+        self.send(('db', 'server_version'))
+        return tuple(self.receive().split('.'))
