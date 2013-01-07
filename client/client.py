@@ -224,12 +224,14 @@ class OEClient(object):
         if not isinstance(view_id, basestring):
             raise TypeError
         module, view_name = view_id.split('.')
-        data_obj = self.create_proxy(db, 'ir.model.data')
-        (model, data_id) = data_obj.get_object_reference(module, view_name)
+        (model, data_id) = self.get_object_reference(db, module, view_name)
         assert model == 'ir.ui.view'
 
         view_proxy = self.create_proxy(db, 'ir.ui.view')
         view_info = view_proxy.read(data_id)
+        server_version = self.oe_conn.server_version()
+        if server_version[0] == '5':
+            view_info = view_info[0]
         return ViewFactory.get(self, db, view_info['model'], data_id)
 
     def login(self, db=None, user=None, password=None):
