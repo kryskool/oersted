@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.append('.')
-
-import client
-
-from distribute_setup import use_setuptools
-use_setuptools()
-
-from setuptools import setup
+# Use distutils instead of setuptools
+from distutils.core import setup
 
 setup(name='oersted',
-      version=client.__version__,
+      version='1.2.1-dev',
       author='PCSol',
       author_email='info@pcsol.be',
       url='http://www.pcsol.be',
