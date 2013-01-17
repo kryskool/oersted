@@ -1,14 +1,76 @@
-v1.2.0, 2010-11-29 -- Added lazy load in Browse objects
-                      Added operation 1 to oe_repr
-                      Views can get Browse attributes
-                      Returns default value instead of AttributeError if there
-                      is no value
-                      Fix DB creation where running more than once
-v1.1.4, 2010-11-10 -- Bugfix use of long to represent browse'id in Browse's m2o
-v1.1.3, 2010-11-09 -- Made Browse object more useable
-v1.1.2, 2010-08-24 -- Added name_search specific API call
-v1.1.1, 2010-08-20 -- Fix datetime attribute getter
-v1.1.0, 2010-08-20 -- Fix search for proxy objects, use O2M descriptor for m2m
-v1.0.1, 2010-08-16 -- Added __version__ variable to __init__.py, some packaging
-                      changes
-v1.0.0, 2010-08-12 -- Initial release
+oersted Changelog
+=================
+
+Here you can see the full list of changes between each Flask release.
+
+Version 1.3.0
+-------------
+
+Released on January 17th 2013
+
+- Fix issue with forbiden acces of private method in >= 6.0
+- Now works correctly with 5.0, 6.0, 6.1
+
+Version 1.2.0
+-------------
+
+Released on November 29th 2010
+
+- Added lazy load in Browse objects
+- Added operation 1 to oe_repr
+- Views can get Browse attributes
+- Returns default value instead of AttributeError if there
+- is no value
+- Fix DB creation where running more than once
+
+Version 1.1.4
+-------------
+
+Released on November 10th 2010
+
+- Bugfix use of long to represent browse'id in Browse's m2o
+
+
+Version 1.1.3
+-------------
+
+Released on November 09th 2010
+
+- Made Browse object more useable
+
+Version 1.1.2
+-------------
+
+Released on August 24th 2010
+
+- Added name_search specific API call
+
+Version 1.1.1
+-------------
+
+Released on August 20th 2010
+
+- Fix datetime attribute getter
+
+Version 1.1.0
+-------------
+
+Released on August 20th 2010
+
+- Fix search for proxy objects, use O2M descriptor for m2m
+
+Version 1.0.1
+-------------
+
+Released on August 16th 2010
+
+- Added __version__ variable to __init__.py, some packaging changes
+
+Version 1.0.0
+-------------
+
+Released on August 8th 2010
+
+- Initial release
+
+# vim:ft=rst
