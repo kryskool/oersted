@@ -4,7 +4,7 @@
 from distutils.core import setup
 
 setup(name='oersted',
-      version='1.2.1-dev',
+      version='1.3.0',
       author='PCSol',
       author_email='info@pcsol.be',
       url='http://www.pcsol.be',
