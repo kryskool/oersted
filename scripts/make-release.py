@@ -142,7 +142,7 @@ def main():
     set_setup_version(version)
     make_git_commit('Bump version number to %s', version)
     make_git_tag(version)
-    build_and_upload()
+    #build_and_upload()
     set_init_version(dev_version)
     set_setup_version(dev_version)
 
